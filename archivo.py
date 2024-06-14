@@ -1,11 +1,15 @@
-from os import system
-from pokemones import *
+# from main import lista_pokemones
+# file = open("pokemones.csv", "x")
 
-def menu_de_usuario():
-    opcion = input("MENU\n1. Ingresar pokemon \n2. Modificar pokemon\n3. Elminar pokemon \n4. Mostrar todos los pokemones\n5. Ordenar pokemones\n6. Buscar pokemones por ID \n7. Calcular promedio y mostrarlo\n8. Salir \n. Elija una opcion: ")
-    return opcion
+# "id_pokemon": 1,
+#         "nombre": "Bulbasaur",
+#         "tipo": "planta",
+#         "poder_de_ataque": 60,
+#         "poder_de_defensa": 62,
+#         "habilidades": ["Clorofila", "Espesura"],
+#         "medida_pokemon": "S"
 
-lista_pokemones = [{
+lista = lista_pokemones = [{
         "id_pokemon": 1,
         "nombre": "Bulbasaur",
         "tipo": "planta",
@@ -186,58 +190,7 @@ lista_pokemones = [{
         "medida_pokemon": "XL"
     }
 ]
-# lista_pokemones = [
-#     {
-#         "id_pokemon": 1,
-#         "nombre": "Bulbasaur",
-#         "tipo": "planta",
-#         "poder_de_ataque": 60,
-#         "poder_de_defensa": 62,
-#         "habilidades": ["Clorofila", "Espesura"],
-#         "medida_pokemon": "M"
-#     },
-#     {
-#         "id_pokemon": 2,
-#         "nombre": "Charmander",
-#         "tipo": "fuego",
-#         "poder_de_ataque": 52,
-#         "poder_de_defensa": 43,
-#         "habilidades": ["Mar Llamas", "Poder Solar"],
-#         "medida_pokemon": "L"
-#     },
-    
-# ]
-
-while True:
-    opcion = menu_de_usuario()
-    match opcion:
-        case "1":
-            #ingresar pokemones en la lista
-            ingresar_pokemon(lista_pokemones) 
-        case "2":
-            #modificar pokemones
-            id_pokemon = int(input("ingrese el id del pokemon: "))
-            editar_pokemon(lista_pokemones, id_pokemon)
-        case "3":
-            # #eliminar pokemon 
-            id_pokemon = int(input("ingrese el id del pokemon a eliminar: "))
-            eliminar_pokemon(lista_pokemones, id_pokemon, lista_eliminados)
-        case "4":
-            #mostrar todos los pokemons
-            mostrar_lista_pokemones(lista_pokemones)
-        case "5":
-            #ordenar los pokemons
-            ordenar_pokemones(lista_pokemones)
-            mostrar_lista_pokemones(lista_pokemones)
-        case "6":
-            #buscar pokemon por id y mostrar la informacion especifica
-            id_pokemon = int(input("por favor ingrese el id del pokemon que desea buscar:"))
-            buscar_pokemon_id(lista_pokemones, id_pokemon)
-        case "7":
-            #calcular promedios
-            # calcular_promedios(lista_pokemones)
-            mostrar_promedios(lista_pokemones)
-        case "8":
-            break
-    system("pause")
-    system("cls")
+# lista = lista_pokemones
+with open("pokemones.csv", "a") as archivo:
+    for i in range(len(lista)):
+        archivo.write(i)

@@ -13,7 +13,7 @@ def crear_pokemon(id_pokemon: int, nombre: str, tipo: str, poder_de_ataque: int,
     
     return diccionario_pokemon
     
-def ingresar_pokemon(lista_pokemones: list):
+def ingresar_pokemon(lista_pokemones: list) -> list:
     for i in range(len(lista_pokemones)):
         id_pokemon = len(lista_pokemones) + 1
         #LLAMAR a las funciones para las validaciones aca
@@ -42,7 +42,7 @@ def ingresar_pokemon(lista_pokemones: list):
         id_pokemon += 1
         break
 
-def editar_pokemon(lista_pokemones: list, id_pokemon: int):
+def editar_pokemon(lista_pokemones: list, id_pokemon: int) -> list:
     for pokemon in lista_pokemones:
         if id_pokemon == pokemon["id_pokemon"]:
             print(f"el pokemon asociado a ese id es: {pokemon["nombre"]}")
@@ -51,7 +51,7 @@ def editar_pokemon(lista_pokemones: list, id_pokemon: int):
             if mensaje == 2:
                 break
             elif mensaje == 1:
-                lista_menu = print("1. Modificar nombre\n 2. Modificar tipo\n 3. Modificar poder de ataque\n 4. Modificar poder de defensa\n5. Modificar habilidades\n6. Modificar tamaño del pokemon\n7. Salir")
+                lista_menu ="1.Modificar nombre\n2.Modificar tipo\n3.Modificar poder de ataque\n4.Modificar poder de defensa\n5.Modificar habilidades\n6.Modificar tamaño del pokemon\n7.Salir\nIngrese un numero de la lista para continuar"
                 lista_opciones = [1,2,3,4,5,6,7]
                 menu_ediciones = get_menus(lista_menu, lista_opciones)
                 
@@ -100,7 +100,7 @@ def editar_pokemon(lista_pokemones: list, id_pokemon: int):
                         break
 
 #eliminar
-def eliminar_pokemon(lista_pokemones: list, id_pokemon: int, lista_eliminados: list):
+def eliminar_pokemon(lista_pokemones: list, id_pokemon: int, lista_eliminados: list) -> list:
     pokemon_a_eliminar = None
     for pokemon in lista_pokemones:
         if id_pokemon == pokemon["id_pokemon"]:
@@ -146,7 +146,10 @@ def ordernar_pokemones_descendente(lista_pokemones: list, seleccion: str):
                 lista_pokemones[j][seleccion] = swapeo                
 
 def ordenar_pokemones(lista_pokemones: list):
-    mensaje_usuario = int(input("1. por Nombre \n 2. por Tipo \n 3. por Ataque \n 4. por Defensa\n Seleccione una opcion para ordenar los pokemones: "))
+    # mensaje_usuario = int(input("1. por Nombre \n 2. por Tipo \n 3. por Ataque \n 4. por Defensa\n Seleccione una opcion para ordenar los pokemones: "))
+    lista_menu1 = "1.por Nombre\n2.por Tipo\n3.por Ataque\n4.por Defensa\nSeleccione un numero de la lista para ordenar los pokemones: "
+    lista_opciones1 = [1,2,3,4]
+    mensaje_usuario = get_menus(lista_menu1, lista_opciones1)
     ordenar = int(input("1. Ascendente \n 2. Descendente\n Seleccione el orden en el que se mostrará: "))
     seleccion = ""
     

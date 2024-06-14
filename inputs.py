@@ -28,7 +28,7 @@ lista_tipos = ["Agua", "Bicho", "Dragon", "Electrico", "Fantasma", "Fuego",
         "Hielo", "Lucha", "Normal", "Planta", "Psiquico", "Roca",
         "Tierra", "Veneno", "Volador"]
 
-def get_tipo(tipos_pokemon: str,lista_tipos: list):
+def get_tipo(tipos_pokemon: str,lista_tipos: list) -> str|None:
     while True:
         for tipo in lista_tipos:
             ingresar_tipo = input("Ingresa un tipo para tu pokemon: ")

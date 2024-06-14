@@ -1,4 +1,9 @@
-def mostrar_pokemones(diccionario_pokemones: list):
+def mostrar_pokemones(diccionario_pokemones: list) -> list:
+    """Muestra los pokemones en formato tabla
+
+    Args:
+        diccionario_pokemones (list): _description_
+    """
     print("*" * 60)
     print("\n")
     print(f"|{'Id':{3}}|{'Nombre':{10}}|{'Tipo':{10}}|{'Ataque':{10}}|{'Tamaño':{10}}|{'Defensa':{10}}|{'Habilidades':{10}}")
