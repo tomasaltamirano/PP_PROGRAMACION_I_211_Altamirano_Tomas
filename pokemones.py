@@ -1,5 +1,6 @@
 from inputs import *
-
+from mensajes import mensajes_genericos
+from tabla import mostrar_pokemones
 def crear_pokemon(id_pokemon: int, nombre: str, tipo: str, poder_de_ataque: int, poder_de_defensa: int, habilidades: str, medida_pokemon: str) -> dict:
     diccionario_pokemon = {
         "id_pokemon": id_pokemon,
@@ -17,12 +18,23 @@ def ingresar_pokemon(lista_pokemones: list):
     for i in range(len(lista_pokemones)):
         id_pokemon = len(lista_pokemones) + 1
         #LLAMAR a las funciones para las validaciones aca
-        nombre = input("ingrese el nombre:")
-        tipo = input("Ingrese el tipo (agua, bicho, dragón, eléctrico, fantasma, fuego,)")
-        poder_de_ataque = get_int(mostrar_mensaje, "El poder de ataque debe estar entre 0 y 150, por favor intenta de nuevo:", 1, 150, 3)
-        poder_de_defensa = get_int(mostrar_mensaje, "El poder de ataque debe estar entre 0 y 150, por favor intenta de nuevo:", 1, 150, 3)
-        habilidades = input("Ingrese las habilidades: ")
-        medida_pokemon = input("Ingrese el tamaño de su pokemon: ")
+        nombre = get_string("ingrese el nombre: ", "error", 20, 3)
+        
+        tipo = get_string("Ingrese las habilidades (agua, bicho, dragon, electrico, fantasma, fuego, hielo, lucha, normal, planta, psiquico, roca, tierra, veneno, volador)","error", 10, 3)
+        
+        poder_de_ataque = get_int("ingrese el poder de ataque: (desde 0 hasta 150): ", "error", 0, 150, 3)
+        
+        poder_de_defensa = get_int("ingrese el poder de defensa: (desde 0 hasta 150): ", "error", 0, 150, 3)
+        
+        habilidades = []
+        while len(habilidades) < 3:
+            habilidad = get_string("Ingrese las habilidades: ", "error", 20, 3)
+            habilidades.append(habilidad)
+            continuar = get_int("Desea ingresar otra habilidad? ingrese 1 para confirmar - 2 para cancelar: ", "error", 1, 2, 3)
+            if continuar == 2:
+                break
+
+        medida_pokemon = get_string("Ingrese el tamaño de su pokemon: (XS, S, M, L, XL)","error", 2, 3)
         
         diccionario_pokemones = crear_pokemon(id_pokemon, nombre, tipo, poder_de_ataque, poder_de_defensa, habilidades, medida_pokemon)
         lista_pokemones.append(diccionario_pokemones)
@@ -32,68 +44,60 @@ def ingresar_pokemon(lista_pokemones: list):
 def editar_pokemon(lista_pokemones: list, id_pokemon: int):
     for pokemon in lista_pokemones:
         if id_pokemon == pokemon["id_pokemon"]:
-            mensaje = input("Está por editar un pokemon, desea continuar? ingrese 1 para si - 2 para no: ")
-            if mensaje == "2":
+            print(f"el pokemon asociado a ese id es: {pokemon["nombre"]}")
+            
+            mensaje = get_int("Está por editar un pokemon, desea continuar? ingrese 1 para confirmar - 2 para cancelar: ", "error", 1, 2, 3)
+            if mensaje == 2:
                 break
-            elif mensaje == "1":
+            elif mensaje == 1:
                 
                 menu_ediciones = int(input("1. Modificar nombre \n 2. Modificar tipo \n 3. Modificar poder de ataque \n 4. Modificar poder de defensa \n 5. Modificar habilidades \n 6. Modificar tamaño del pokemon \n 7. Salir"))
                 
                 match menu_ediciones:
                     case 1:
-                        nombre_nuevo = input("ingrese un nuevo nombre para su pokemon:")
+                        nombre_nuevo = get_string("Ingrese un nombre nuevo: ", "error", 20, 3)
                         pokemon["nombre"] = nombre_nuevo
                     case 2:
-                        tipo_nuevo = input("Ingrese el nuevo tipo: ")
+                        tipo_nuevo = get_string("Ingrese un tipo nuevo: ", "error", 10, 3)
                         pokemon["tipo"] = tipo_nuevo
                     case 3:
-                        poder_nuevo = int(input("Ingrese el nuevo poder de ataque: "))
+                        poder_nuevo = get_int("Ingrese un nuevo poder de ataque: ", "error",0, 150, 3)
                         pokemon["poder_de_ataque"] = poder_nuevo
                     case 4:
-                        defensa_nuevo = int(input("Ingrese el nuevo poder de defensa: "))
+                        defensa_nuevo =  get_int("Ingrese un nuevo poder de defensa: ", "error",0, 150, 3)
                         pokemon["poder_de_defensa"] = defensa_nuevo
                     case 5:
-                        habilidad_nueva = input("Ingrese la habilidad nueva: ")
+                        habilidad_nueva = get_string("Ingrese una nueva habilidad: ", "error", 20, 3)
                         pokemon["habilidad"] = habilidad_nueva
                     case 6:
-                        medida_nueva = input("Ingrese el nuevo tamaño: ")
+                        medida_nueva = get_string("Ingrese un tamaño nuevo: ", "error", 2, 3)
                         pokemon["medida_pokemon"] = medida_nueva
                     case 7:
                         break
 
 #eliminar
-def eliminar_pokemon(lista_pokemones: list, id_pokemon: int):
+def eliminar_pokemon(lista_pokemones: list, id_pokemon: int, lista_eliminados: list):
     pokemon_a_eliminar = None
     for pokemon in lista_pokemones:
         if id_pokemon == pokemon["id_pokemon"]:
             print(f"el pokemon asociado a ese id es: {pokemon["nombre"]}")
-            mensaje = input("Está por eliminar un pokemon, desea continuar? ingrese 1 para si - 2 para no: ")
-            if mensaje == "2":
+            mensaje = get_int("Está por eliminar un pokemon, desea continuar? ingrese 1 para confirmar - 2 para cancelar: ", "error", 1, 2, 3)
+            if mensaje == 2:
                 break
-            elif mensaje == "1":
+            elif mensaje == 1:
                 pokemon_a_eliminar = pokemon
                 print("pokemon eliminado!!")
-                mensaje = input("desea ver los datos del pokemon eliminado?: ingrese 1 para si - 2 para no: ")
-                if mensaje == "2":
+                mensaje = get_int("Desea ver los datos del pokemon eliminado? ingrese 1 para confirmar - 2 para cancelar: ", "error", 1, 2, 3)
+                if mensaje == 2:
                     break
-                elif mensaje == "1":
-                    print(f"{'Id':{3}}|{'Nombre':{20}}|{'Tipo':{20}}|{'Ataque':{20}}|{'Tamaño':{20}}|{'Defensa':{20}}|{'Habilidades':{20}}")
-                    print(f"{pokemon["id_pokemon"]}\t|{pokemon["nombre"]}\t|{pokemon["tipo"]}\t|{pokemon["poder_de_ataque"]}\t|{pokemon["poder_de_defensa"]}\t|{pokemon["habilidades"]}\t|{pokemon["medida_pokemon"]} ")
-                    
+                elif mensaje == 1:
+                    mostrar_pokemones(pokemon)
                 break
         
     if pokemon_a_eliminar != None:
         lista_pokemones.remove(pokemon_a_eliminar)
-    return pokemon_a_eliminar
-    
-#mostrar la lista de pokemons
-def mostrar_pokemones(diccionario_pokemones: list):
-    # for pokemon in lista_pokemones:
-    print("*" * 60)
-    print("\n")
-    print(f"|{'Id':{3}}|{'Nombre':{10}}|{'Tipo':{10}}|{'Ataque':{10}}|{'Tamaño':{10}}|{'Defensa':{10}}|{'Habilidades':{10}}")
-    print("-" * 60)
-    print(f"{diccionario_pokemones["id_pokemon"]}\t|{diccionario_pokemones["nombre"]}\t|{diccionario_pokemones["tipo"]}\t|{diccionario_pokemones["poder_de_ataque"]}\t|{diccionario_pokemones["poder_de_defensa"]}\t|{diccionario_pokemones["habilidades"]}")
+        # lista_eliminados.append(pokemon_a_eliminar)
+    # return pokemon_a_eliminar 
         
 def mostrar_lista_pokemones(lista_pokemones: list):
     for pokemon in lista_pokemones:
@@ -141,7 +145,8 @@ def ordenar_pokemones(lista_pokemones: list):
 def buscar_pokemon_id(lista_pokemones: list, id_pokemon: int):
     for pokemon in lista_pokemones:
         if id_pokemon == pokemon["id_pokemon"]:
-            print(f"el pokemon asociado a ese ID es: {pokemon["nombre"]} y sus atributos son: \n {pokemon["id_pokemon"]}\t|{pokemon["tipo"]}\t|{pokemon["poder_de_ataque"]}\t|{pokemon["poder_de_defensa"]}\t|{pokemon["habilidades"]}\t|{pokemon["medida_pokemon"]}")
+            print("pokemon encontrado!")
+            mostrar_pokemones(pokemon)
 
 def calcular_promedios(lista_pokemones: list):
     total_electricos = 0
@@ -154,13 +159,13 @@ def calcular_promedios(lista_pokemones: list):
     
     for pokemon in lista_pokemones:
         tipo = pokemon["tipo"]
-        if tipo == "Eléctrico":
+        if tipo == "electrico":
             total_electricos += 1
             suma_electricos += pokemon["poder_de_ataque"]
-        elif tipo == "Psíquico":
+        elif tipo == "psiquico":
             total_psiquicos += 1
             suma_psiquicos += pokemon["poder_de_ataque"]
-        elif tipo == "Tierra":
+        elif tipo == "tierra":
             total_tierra += 1
             suma_tierra += pokemon["poder_de_defensa"]
         
@@ -195,6 +200,6 @@ def mostrar_promedios(lista_pokemones: list):
             else:
                 print("No hay pokemones de tierra en la lista.")
         case _:
-            print("Opción inválida")
+            print("error, no seleccionaste correctamente una de las opciones disponibles")
         
     

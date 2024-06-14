@@ -1,32 +1,29 @@
-from validate import validate_number, validate_lenght
+from mensajes import mensajes_genericos
 
-def get_int(mostar_mensaje:str, mensaje_error:str, minimo:int, maximo:int, reintentos:int) ->int|None:
-    numero = int(input(mensaje_error))
-    resultado = validate_number(numero, mensaje_error, minimo, maximo, reintentos)
-    
-    return resultado
+def get_string(mensaje: str, mensaje_error: str, longitud_maxima: int, reintentos: int) -> str | None:
+    for _ in range(reintentos):
+        entrada_usuario = input(mensaje)
+        if len(entrada_usuario) > longitud_maxima:
+            print(mensaje_error + f" (máximo {longitud_maxima} caracteres)")
+        elif not entrada_usuario[0].isupper():
+            print(mensaje_error + " (primer caracter debe ser mayuscula)")
+        else:
+            return entrada_usuario
+    # print(mensaje_error + " (excedió el número de reintentos)")
+    # return None
 
-# print(get_int("Por favor, ingrese un número entre 0 y 150: ", "El número ingresado excede el limite, probá de nuevo: ", 1, 10, 3))
+def get_int(mensaje: str, mensaje_error: str, minimo: int, maximo: int, reintentos: int) -> int | None:
+    for _ in range(reintentos):
+        numero_str = input(mensaje)
+        if "." in numero_str:
+            print("no se permiten numeros flotantes")
+            continue
+        numero = int(numero_str)
+        if minimo <= numero <= maximo:
+            return numero
+    print(mensaje_error)
+    # return None
 
-def mostrar_mensaje(mensaje):
-    print(mensaje)
-    
-    
-    
-# def get_string(mensaje_entrada:str, 
-#                mensaje_error:str, 
-#                longitud:int, 
-#                reintentos:int)->str|None: 
-#     mensaje_entrada = input(mensaje)
-    
-#     caracteres_ingresados = validate_lenght(mensaje_entrada,mensaje_error,longitud,reintentos)
 
-#     return caracteres_ingresados
 
-# mensaje = "Por favor ingrese un mensaje que no supere los 10 caracteres: "
-# mensaje_error = "El mensaje supera los caracteres maximos"
-# longitud = 10
-# reintentos = 2
 
-# print(get_string(mensaje, mensaje_error, longitud, reintentos))
-    

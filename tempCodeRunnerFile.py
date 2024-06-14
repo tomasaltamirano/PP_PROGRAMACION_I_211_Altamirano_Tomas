@@ -1,2 +1,1 @@
- # system("pause")
-    # system("cls")
+print(get_int("ingrese el poder de ataque: (desde 0 hasta 150): ", "error, superaste el poder de ataque maximo:", 0, 150, 3))
