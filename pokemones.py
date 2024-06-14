@@ -1,5 +1,4 @@
 from inputs import *
-from mensajes import mensajes_genericos
 from tabla import mostrar_pokemones
 def crear_pokemon(id_pokemon: int, nombre: str, tipo: str, poder_de_ataque: int, poder_de_defensa: int, habilidades: str, medida_pokemon: str) -> dict:
     diccionario_pokemon = {
@@ -20,7 +19,9 @@ def ingresar_pokemon(lista_pokemones: list):
         #LLAMAR a las funciones para las validaciones aca
         nombre = get_string("ingrese el nombre: ", "error", 20, 3)
         
-        tipo = get_string("Ingrese las habilidades (agua, bicho, dragon, electrico, fantasma, fuego, hielo, lucha, normal, planta, psiquico, roca, tierra, veneno, volador)","error", 10, 3)
+        tipos_pokemon = print("los tipos de pokemon que podes ingresar son: Agua, Bicho, Dragon, Electrico, Fantasma, Fuego,Hielo, Lucha, Normal, Planta, Psiquico, Roca,Tierra, Veneno, Volador")
+        
+        tipo = get_tipo(tipos_pokemon, lista_tipos)
         
         poder_de_ataque = get_int("ingrese el poder de ataque: (desde 0 hasta 150): ", "error", 0, 150, 3)
         
@@ -50,28 +51,51 @@ def editar_pokemon(lista_pokemones: list, id_pokemon: int):
             if mensaje == 2:
                 break
             elif mensaje == 1:
-                
-                menu_ediciones = int(input("1. Modificar nombre \n 2. Modificar tipo \n 3. Modificar poder de ataque \n 4. Modificar poder de defensa \n 5. Modificar habilidades \n 6. Modificar tamaño del pokemon \n 7. Salir"))
+                lista_menu = print("1. Modificar nombre\n 2. Modificar tipo\n 3. Modificar poder de ataque\n 4. Modificar poder de defensa\n5. Modificar habilidades\n6. Modificar tamaño del pokemon\n7. Salir")
+                lista_opciones = [1,2,3,4,5,6,7]
+                menu_ediciones = get_menus(lista_menu, lista_opciones)
                 
                 match menu_ediciones:
                     case 1:
                         nombre_nuevo = get_string("Ingrese un nombre nuevo: ", "error", 20, 3)
                         pokemon["nombre"] = nombre_nuevo
+                        print("Pokemon modificado! acá están los cambios:")
+                        mostrar_pokemones(pokemon)
                     case 2:
                         tipo_nuevo = get_string("Ingrese un tipo nuevo: ", "error", 10, 3)
                         pokemon["tipo"] = tipo_nuevo
+                        print("Pokemon modificado! acá están los cambios:")
+                        
+                        mostrar_pokemones(pokemon)
+                        
                     case 3:
                         poder_nuevo = get_int("Ingrese un nuevo poder de ataque: ", "error",0, 150, 3)
                         pokemon["poder_de_ataque"] = poder_nuevo
+                        print("Pokemon modificado! acá están los cambios:")
+                        
+                        mostrar_pokemones(pokemon)
+                        
                     case 4:
                         defensa_nuevo =  get_int("Ingrese un nuevo poder de defensa: ", "error",0, 150, 3)
                         pokemon["poder_de_defensa"] = defensa_nuevo
+                        print("Pokemon modificado! acá están los cambios:")
+                        
+                        mostrar_pokemones(pokemon)
+                        
                     case 5:
                         habilidad_nueva = get_string("Ingrese una nueva habilidad: ", "error", 20, 3)
                         pokemon["habilidad"] = habilidad_nueva
+                        print("Pokemon modificado! acá están los cambios:")
+                        
+                        mostrar_pokemones(pokemon)
+                        
                     case 6:
                         medida_nueva = get_string("Ingrese un tamaño nuevo: ", "error", 2, 3)
                         pokemon["medida_pokemon"] = medida_nueva
+                        print("Pokemon modificado! acá están los cambios:")
+                        
+                        mostrar_pokemones(pokemon)
+                        
                     case 7:
                         break
 
