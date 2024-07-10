@@ -1,14 +1,22 @@
 from os import system
-from pokemones import *
+from modules.pokemones import *
+from modules.batalla_pokemon import *
+from modules.utilidades import *
+# import csv
 
-def menu_de_usuario():
-    opcion = input("MENU\n1. Ingresar pokemon \n2. Modificar pokemon\n3. Elminar pokemon \n4. Mostrar todos los pokemones\n5. Ordenar pokemones\n6. Buscar pokemones por ID \n7. Calcular promedio y mostrarlo\n8. Salir \n. Elija una opcion: ")
-    return opcion
+def menu_de_usuario() -> str:
+    """
+    Muestra un menú interactivo para el usuario y captura la opción seleccionada.
+    Returns:
+        str: La opción seleccionada por el usuario.
+    """
+    opcion = input("MENU\n1. Ingresar pokemon \n2. Modificar pokemon\n3. Elminar pokemon \n4. Mostrar todos los pokemones\n5. Ordenar pokemones\n6. Buscar pokemones por ID \n7. Calcular promedio y mostrarlo\n8. Batalla pokemon \n9. Guardar json \n10. Salir \n. Elija una opcion: ")
+    return opcion  
 
 lista_pokemones = [{
         "id_pokemon": 1,
         "nombre": "Bulbasaur",
-        "tipo": "planta",
+        "tipo": "Planta",
         "poder_de_ataque": 60,
         "poder_de_defensa": 62,
         "habilidades": ["Clorofila", "Espesura"],
@@ -18,19 +26,19 @@ lista_pokemones = [{
         "id_pokemon": 2,
         "nombre": "Charmander",
         "tipo": "Fuego",
-        "poder_de_ataque": 52,
+        "poder_de_ataque": 80,
         "poder_de_defensa": 43,
-        "habilidades": ["Mar Llamas", "Poder Solar"],
-        "medida_pokemon": "M"
+        "habilidades": ["Lanzallamas", "Poder Solar"],
+        "medida_pokemon": "XL"
     },
     {
         "id_pokemon": 3,
         "nombre": "Squirtle",
         "tipo": "Agua",
-        "poder_de_ataque": 48,
+        "poder_de_ataque": 80,
         "poder_de_defensa": 65,
-        "habilidades": ["Torrente", "Cura Lluvia"],
-        "medida_pokemon": "XL"
+        "habilidades": ["Hidrobomba", "Cura Lluvia"],
+        "medida_pokemon": "L"
     },
     {
         "id_pokemon": 4,
@@ -62,7 +70,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 7,
         "nombre": "Pikachu",
-        "tipo": "electrico",
+        "tipo": "Electrico",
         "poder_de_ataque": 55,
         "poder_de_defensa": 40,
         "habilidades": ["Electricidad Estática", "Pararrayos"],
@@ -71,7 +79,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 8,
         "nombre": "Sandshrew",
-        "tipo": "tierra",
+        "tipo": "Tierra",
         "poder_de_ataque": 75,
         "poder_de_defensa": 85,
         "habilidades": ["Velo Arena", "Flexibilidad"],
@@ -80,7 +88,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 9,
         "nombre": "Abra",
-        "tipo": "psiquico",
+        "tipo": "Psiquico",
         "poder_de_ataque": 20,
         "poder_de_defensa": 15,
         "habilidades": ["Sincronía", "Foco Interno"],
@@ -98,7 +106,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 11,
         "nombre": "Magnemite",
-        "tipo": "electrico",
+        "tipo": "Electrico",
         "poder_de_ataque": 55,
         "poder_de_defensa": 95,
         "habilidades": ["Imán", "Robustez"],
@@ -107,7 +115,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 12,
         "nombre": "Voltorb",
-        "tipo": "electrico",
+        "tipo": "Electrico",
         "poder_de_ataque": 30,
         "poder_de_defensa": 50,
         "habilidades": ["Levitación", "Ráfaga"],
@@ -116,7 +124,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 13,
         "nombre": "Electabuzz",
-        "tipo": "electrico",
+        "tipo": "Electrico",
         "poder_de_ataque": 83,
         "poder_de_defensa": 57,
         "habilidades": ["Electricidad Estática", "Espíritu Vital"],
@@ -125,7 +133,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 14,
         "nombre": "Jolteon",
-        "tipo": "electrico",
+        "tipo": "Electrico",
         "poder_de_ataque": 65,
         "poder_de_defensa": 60,
         "habilidades": ["Absorber Electricidad", "Electricidad Estática"],
@@ -134,7 +142,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 15,
         "nombre": "Alakazam",
-        "tipo": "psiquico",
+        "tipo": "Psiquico",
         "poder_de_ataque": 50,
         "poder_de_defensa": 45,
         "habilidades": ["Sincronía", "Cálculo"],
@@ -143,7 +151,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 16,
         "nombre": "Drowzee",
-        "tipo": "psiquico",
+        "tipo": "Psiquico",
         "poder_de_ataque": 48,
         "poder_de_defensa": 45,
         "habilidades": ["Insomnio", "Imperturbable"],
@@ -152,7 +160,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 17,
         "nombre": "Hypno",
-        "tipo": "psiquico",
+        "tipo": "Psiquico",
         "poder_de_ataque": 73,
         "poder_de_defensa": 70,
         "habilidades": ["Insomnio", "Precognición"],
@@ -161,7 +169,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 18,
         "nombre": "Cubone",
-        "tipo": "tierra",
+        "tipo": "Tierra",
         "poder_de_ataque": 50,
         "poder_de_defensa": 95,
         "habilidades": ["Cabeza Roca", "Pararrayos"],
@@ -170,7 +178,7 @@ lista_pokemones = [{
     {
         "id_pokemon": 19,
         "nombre": "Diglett",
-        "tipo": "tierra",
+        "tipo": "Tierra",
         "poder_de_ataque": 55,
         "poder_de_defensa": 25,
         "habilidades": ["Velo Arena", "Trampa Arena"],
@@ -179,38 +187,28 @@ lista_pokemones = [{
     {
         "id_pokemon": 20,
         "nombre": "Golem",
-        "tipo": "tierra",
+        "tipo": "Tierra",
         "poder_de_ataque": 120,
         "poder_de_defensa": 130,
         "habilidades": ["Cabeza Roca", "Robustez"],
         "medida_pokemon": "XL"
     }
 ]
-# lista_pokemones = [
-#     {
-#         "id_pokemon": 1,
-#         "nombre": "Bulbasaur",
-#         "tipo": "planta",
-#         "poder_de_ataque": 60,
-#         "poder_de_defensa": 62,
-#         "habilidades": ["Clorofila", "Espesura"],
-#         "medida_pokemon": "M"
-#     },
-#     {
-#         "id_pokemon": 2,
-#         "nombre": "Charmander",
-#         "tipo": "fuego",
-#         "poder_de_ataque": 52,
-#         "poder_de_defensa": 43,
-#         "habilidades": ["Mar Llamas", "Poder Solar"],
-#         "medida_pokemon": "L"
-#     },
-    
-# ]
+
+
+nombre_archivo = "pokemones.csv"
+crear_csv(nombre_archivo)
+
 
 while True:
     opcion = menu_de_usuario()
     match opcion:
+        case "0":
+            victoria = verificar_victoria(lista_pokemones)
+            if victoria:
+                print("¡Ganamos la batalla!")
+            else:
+                print("No tenemos suficientes pokemones para ganar.")
         case "1":
             #ingresar pokemones en la lista
             ingresar_pokemon(lista_pokemones) 
@@ -238,6 +236,14 @@ while True:
             # calcular_promedios(lista_pokemones)
             mostrar_promedios(lista_pokemones)
         case "8":
+            batalla_pokemon(lista_pokemones)
+
+        case "9":
+            guardar_json(lista_pokemones)
+        case "10":
+            
+            guardar_pokemones(nombre_archivo, lista_pokemones)
             break
+        
     system("pause")
     system("cls")

@@ -1,0 +1,21 @@
+1, Bulbasaur, Planta, 60, 62, ['Clorofila', 'Espesura'], S
+2, Charmander, Fuego, 80, 43, ['Lanzallamas', 'Poder Solar'], XL
+3, Squirtle, Agua, 80, 65, ['Hidrobomba', 'Cura Lluvia'], L
+4, Pidgey, Volador, 45, 40, ['Vista Lince', 'Tumbos'], M
+5, Rattata, Normal, 56, 35, ['Fuga', 'Agallas'], XS
+6, Ekans, Veneno, 60, 44, ['Intimidación', 'Mudar'], M
+7, Pikachu, Electrico, 55, 40, ['Electricidad Estática', 'Pararrayos'], L
+8, Sandshrew, Tierra, 75, 85, ['Velo Arena', 'Flexibilidad'], XS
+9, Abra, Psiquico, 20, 15, ['Sincronía', 'Foco Interno'], XL
+10, Geodude, Roca, 80, 100, ['Cabeza Roca', 'Robustez'], XS
+11, Magnemite, Electrico, 55, 95, ['Imán', 'Robustez'], S
+12, Voltorb, Electrico, 30, 50, ['Levitación', 'Ráfaga'], S
+13, Electabuzz, Electrico, 83, 57, ['Electricidad Estática', 'Espíritu Vital'], S
+14, Jolteon, Electrico, 65, 60, ['Absorber Electricidad', 'Electricidad Estática'], XS
+15, Alakazam, Psiquico, 50, 45, ['Sincronía', 'Cálculo'], XL
+16, Drowzee, Psiquico, 48, 45, ['Insomnio', 'Imperturbable'], L
+17, Hypno, Psiquico, 73, 70, ['Insomnio', 'Precognición'], M
+18, Cubone, Tierra, 50, 95, ['Cabeza Roca', 'Pararrayos'], XL
+19, Diglett, Tierra, 55, 25, ['Velo Arena', 'Trampa Arena'], M
+20, Golem, Tierra, 120, 130, ['Cabeza Roca', 'Robustez'], XL
+21, Pepito, Agua, 100, 100, ['Volar'], S

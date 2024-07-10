@@ -1,6 +1,23 @@
-from inputs import *
-from tabla import mostrar_pokemones
+from modules.inputs import *
+from modules.tabla import mostrar_pokemones
+from modules.batalla_pokemon import *
+
 def crear_pokemon(id_pokemon: int, nombre: str, tipo: str, poder_de_ataque: int, poder_de_defensa: int, habilidades: str, medida_pokemon: str) -> dict:
+    """
+    Crea un diccionario que representa un Pokémon con los detalles proporcionados.
+
+    Args:
+        id_pokemon (int): El ID único del Pokémon.
+        nombre (str): El nombre del Pokémon.
+        tipo (str): El tipo de Pokémon (por ejemplo, Agua, Fuego, Planta, etc.).
+        poder_de_ataque (int): El poder de ataque del Pokémon.
+        poder_de_defensa (int): El poder de defensa del Pokémon.
+        habilidades (str): Las habilidades del Pokémon.
+        medida_pokemon (str): La medida del Pokémon (por ejemplo, altura, peso, etc.).
+
+    Returns:
+        dict: Un diccionario con los detalles del Pokémon.
+    """
     diccionario_pokemon = {
         "id_pokemon": id_pokemon,
         "nombre": nombre,
@@ -14,6 +31,17 @@ def crear_pokemon(id_pokemon: int, nombre: str, tipo: str, poder_de_ataque: int,
     return diccionario_pokemon
     
 def ingresar_pokemon(lista_pokemones: list) -> list:
+    
+    """
+    Permite al usuario ingresar un nuevo Pokémon a una lista de pokémones, solicitando los detalles necesarios.
+
+    Args:
+        lista_pokemones (list): Lista existente de pokémones.
+
+    Returns:
+        list: Lista actualizada de pokémones con el nuevo Pokémon agregado.
+    """
+    
     for i in range(len(lista_pokemones)):
         id_pokemon = len(lista_pokemones) + 1
         #LLAMAR a las funciones para las validaciones aca
@@ -43,6 +71,18 @@ def ingresar_pokemon(lista_pokemones: list) -> list:
         break
 
 def editar_pokemon(lista_pokemones: list, id_pokemon: int) -> list:
+    
+    """
+    Permite al usuario editar los detalles de un Pokémon existente en la lista de pokémones.
+
+    Args:
+        lista_pokemones (list): Lista existente de pokémones.
+        id_pokemon (int): El ID del Pokémon que se desea editar.
+
+    Returns:
+        list: Lista actualizada de pokémones con el Pokémon editado.
+    """
+    
     for pokemon in lista_pokemones:
         if id_pokemon == pokemon["id_pokemon"]:
             print(f"el pokemon asociado a ese id es: {pokemon["nombre"]}")
@@ -101,6 +141,19 @@ def editar_pokemon(lista_pokemones: list, id_pokemon: int) -> list:
 
 #eliminar
 def eliminar_pokemon(lista_pokemones: list, id_pokemon: int, lista_eliminados: list) -> list:
+    
+    """
+    Permite al usuario eliminar un Pokémon de la lista de pokémones.
+
+    Args:
+        lista_pokemones (list): Lista existente de pokémones.
+        id_pokemon (int): El ID del Pokémon que se desea eliminar.
+        lista_eliminados (list): Lista donde se almacenarán los pokémones eliminados.
+
+    Returns:
+        list: Lista actualizada de pokémones con el Pokémon eliminado.
+    """
+    
     pokemon_a_eliminar = None
     for pokemon in lista_pokemones:
         if id_pokemon == pokemon["id_pokemon"]:
@@ -124,11 +177,26 @@ def eliminar_pokemon(lista_pokemones: list, id_pokemon: int, lista_eliminados: l
     # return pokemon_a_eliminar 
         
 def mostrar_lista_pokemones(lista_pokemones: list):
+    """
+    Muestra la información de todos los pokémones en una lista.
+
+    Args:
+        lista_pokemones (list): Lista de pokémones a mostrar.
+    """
     for pokemon in lista_pokemones:
         mostrar_pokemones(pokemon)
 
 def ordernar_pokemones_ascendente(lista_pokemones: list, seleccion: str):
+    """
+    Ordena una lista de pokémones en orden ascendente basado en el atributo seleccionado.
+
+    Args:
+        lista_pokemones (list): Lista de pokémones a ordenar.
+        seleccion (str): El atributo por el cual se ordenarán los pokémones (por ejemplo, "nombre", "poder_de_ataque", etc.).
+    """
+    
     lista = len(lista_pokemones)
+    
     for i in range(0, lista - 1):
         for j in range(i + 1, lista):
             if lista_pokemones[i][seleccion] > lista_pokemones[j][seleccion]:
@@ -137,6 +205,14 @@ def ordernar_pokemones_ascendente(lista_pokemones: list, seleccion: str):
                 lista_pokemones[j][seleccion] = swapeo                
 
 def ordernar_pokemones_descendente(lista_pokemones: list, seleccion: str):
+    """
+    Ordena una lista de pokémones en orden descendente basado en el atributo seleccionado.
+
+    Args:
+        lista_pokemones (list): Lista de pokémones a ordenar.
+        seleccion (str): El atributo por el cual se ordenarán los pokémones (por ejemplo, "nombre", "poder_de_ataque", etc.).
+    """
+    
     lista = len(lista_pokemones)
     for i in range(0, lista - 1):
         for j in range(i + 1, lista):
@@ -146,7 +222,14 @@ def ordernar_pokemones_descendente(lista_pokemones: list, seleccion: str):
                 lista_pokemones[j][seleccion] = swapeo                
 
 def ordenar_pokemones(lista_pokemones: list):
-    # mensaje_usuario = int(input("1. por Nombre \n 2. por Tipo \n 3. por Ataque \n 4. por Defensa\n Seleccione una opcion para ordenar los pokemones: "))
+    
+    """
+    Ordena una lista de pokémones según el atributo seleccionado y en el orden especificado.
+    Realizando el llamado a la funcion correspondiente al orden seleccionado.
+
+    Args:
+        lista_pokemones (list): Lista de pokémones a ordenar.
+    """
     lista_menu1 = "1.por Nombre\n2.por Tipo\n3.por Ataque\n4.por Defensa\nSeleccione un numero de la lista para ordenar los pokemones: "
     lista_opciones1 = [1,2,3,4]
     mensaje_usuario = get_menus(lista_menu1, lista_opciones1)
@@ -170,12 +253,31 @@ def ordenar_pokemones(lista_pokemones: list):
             
 
 def buscar_pokemon_id(lista_pokemones: list, id_pokemon: int):
+    """
+    Busca un Pokémon en la lista de pokémones por su ID y muestra su información si se encuentra.
+
+    Args:
+        lista_pokemones (list): Lista de pokémones.
+        id_pokemon (int): El ID del Pokémon que se desea buscar.
+    """
+    
     for pokemon in lista_pokemones:
         if id_pokemon == pokemon["id_pokemon"]:
             print("pokemon encontrado!")
             mostrar_pokemones(pokemon)
 
 def calcular_promedios(lista_pokemones: list):
+    
+    """
+    Calcula los promedios de poder de ataque y defensa para diferentes tipos de Pokémon en la lista.
+
+    Args:
+        lista_pokemones (list): Lista de pokémones.
+
+    Returns:
+        dict: Un diccionario con los promedios calculados para los tipos "Electrico", "Psiquico" y "Tierra".
+    """
+    
     total_electricos = 0
     total_psiquicos = 0
     total_tierra = 0
@@ -186,13 +288,13 @@ def calcular_promedios(lista_pokemones: list):
     
     for pokemon in lista_pokemones:
         tipo = pokemon["tipo"]
-        if tipo == "electrico":
+        if tipo == "Electrico":
             total_electricos += 1
             suma_electricos += pokemon["poder_de_ataque"]
-        elif tipo == "psiquico":
+        elif tipo == "Psiquico":
             total_psiquicos += 1
             suma_psiquicos += pokemon["poder_de_ataque"]
-        elif tipo == "tierra":
+        elif tipo == "Tierra":
             total_tierra += 1
             suma_tierra += pokemon["poder_de_defensa"]
         
@@ -207,6 +309,13 @@ def calcular_promedios(lista_pokemones: list):
     return promedios
 
 def mostrar_promedios(lista_pokemones: list):
+    """
+    Muestra los promedios de poder de ataque o defensa para diferentes tipos de Pokémon según la opción seleccionada por el usuario.
+
+    Args:
+        lista_pokemones (list): Lista de pokémones.
+    """
+    
     mensaje_usuario = int(input("1. Ataque de los pokemones eléctricos \n 2. Ataque de los pokemones psíquicos \n 3. Defensa de los pokemones tierra\n Seleccione una opcion para calcular el promedio de los pokemones: "))
     promedios = calcular_promedios(lista_pokemones)
         
@@ -229,4 +338,4 @@ def mostrar_promedios(lista_pokemones: list):
         case _:
             print("error, no seleccionaste correctamente una de las opciones disponibles")
         
-    
+
